@@ -3,7 +3,7 @@ import { getPostsMeta } from "@/lib/posts";
 import Link from "next/link";
 
 
-export const revalidate = 0;
+export const revalidate = 86400;
 
 type Props = {
     params: {
@@ -11,15 +11,15 @@ type Props = {
     }
 }
 
-// export async function generateStaticParams() {
-//     const posts = await getPostsMeta() // deduped!
+export async function generateStaticParams() {
+    const posts = await getPostsMeta() // deduped!
 
-//     if (!posts) return [];
+    if (!posts) return [];
 
-//     const tags = new Set(posts.map(post => post.tags).flat());
+    const tags = new Set(posts.map(post => post.tags).flat());
 
-//     return Array.from(tags).map((tag) => ({tag}));
-// }
+    return Array.from(tags).map((tag) => ({ tag }));
+}
 
 export function generateMetadata({ params: { tag } }: Props) {
     return {
